@@ -20,13 +20,17 @@
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "name": "SCP: SL",
+      "url": "https://scpslgame.com/"
+    }
+    {
+      "name": "Squad",
+      "url": "https://www.joinsquad.com/"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Help Center",
+    "url": "https://daonscp.channel.io"
   },
   "anchors": [
     {
