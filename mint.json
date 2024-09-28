@@ -7,7 +7,7 @@
   },
   "favicon": "/favicon.png",
   "colors": {
-    "primary": "#63d8ff",
+    "primary": "#6394ff",
     "light": "#AE87FF",
     "dark": "#0D001D",
     "background": {
@@ -15,7 +15,7 @@
     },
     "anchors": {
       "from": "#FF7F57",
-      "to": "#63d8ff"
+      "to": "#6394ff"
     }
   },
   "topbarLinks": [
