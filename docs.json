@@ -75,7 +75,7 @@
         "description": "Explore our APIs",
         "groups": [
           {
-            "group": "SCP: Secret Laboratory Server List API",
+            "group": "SCP: SL Server List API",
             "pages": [
               "api-reference/api-introduction",
               "api-reference/get-server-list",
