@@ -86,12 +86,6 @@
       }
     ]
   },
-  "api": {
-    "baseUrl": "https://nwapi.daon.xyz",
-    "playground": {
-      "mode": "simple"
-    }
-  },
   "footer": {
     "socials": {
       "discord": "https://discord.gg/daon"
