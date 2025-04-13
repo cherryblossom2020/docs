@@ -1,3 +1,4 @@
+// mint.json
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "DAON INFO CENTER",
@@ -32,6 +33,7 @@
     "name": "Help Center",
     "url": "https://daonscp.channel.io"
   },
+  // "openapi": "openapi.json", // REMOVE THIS LINE
   "anchors": [
     {
       "name": "Discord",
@@ -47,23 +49,29 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "development"]
+      "pages": [
+        "introduction",
+        "quickstart",
+        "development"
+      ]
     },
     {
       "group": "Essentials",
-      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
-    },
-    {
-      "group": "API Documentation",
-      "pages": ["api-reference/authentication"]
-    },
-    {
-      "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/update",
-        "api-reference/endpoint/delete"
+        "essentials/markdown",
+        "essentials/code",
+        "essentials/images",
+        "essentials/settings",
+        "essentials/navigation"
+      ]
+    },
+    {
+      "group": "NWApi Server List API",
+      "pages": [
+        // Make sure these paths match your file structure
+        "api-reference/api-introduction",
+        "api-reference/get-server-list",
+        "api-reference/get-data-timestamp"
       ]
     }
   ],
