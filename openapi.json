@@ -35,7 +35,6 @@
       "get": {
         "tags": ["Servers"],
         "summary": "Get Server List",
-        "description": "Retrieves a list of SCP:SL servers with powerful filtering, sorting and field selection capabilities.\n\n### Features\n- **Filter** by any server property (e.g., `isoCode=US`, `modded=true`)\n- **Select specific fields** to reduce payload size (`fields=ip,port,players`)\n- **Limit results** to improve performance (`limit=10`)\n- **Sort by distance** from the client location (`sortBy=distance`)\n\n### Note on Filtering\nAny query parameter *not* named `fields`, `limit`, or `sortBy` is treated as a filter where the parameter name is the field key and the parameter value is the value to match.\n- String values are matched case-insensitive\n- Boolean values should be specified as `true` or `false`\n- Numeric values are matched exactly",
         "operationId": "getServerList",
         "parameters": [
           {
