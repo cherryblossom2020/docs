@@ -1,5 +1,5 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
+  "$schema": "https://mintlify.com/schema.json",
   "name": "DAON INFO CENTER",
   "theme": "maple",
   "logo": {
@@ -11,14 +11,7 @@
   "colors": {
     "primary": "#6394ff",
     "light": "#AE87FF",
-    "dark": "#0D001D",
-    "background": {
-      "dark": "#090014"
-    },
-    "anchors": {
-      "from": "#FF7F57",
-      "to": "#6394ff"
-    }
+    "dark": "#0D001D"
   },
   "navbar": {
     "links": [
