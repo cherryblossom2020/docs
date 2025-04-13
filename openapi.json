@@ -14,11 +14,6 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "servers": [
-    {
-      "url": "https://nwapi.daon.xyz",
-      "description": "Production Server"
-    }
   ],
   "tags": [
     {
@@ -30,6 +25,10 @@
       "/": {
         "get": {
           "tags": ["Real-Time Data"],
+          "servers": [
+            {
+              "url": "https://nwapi.daon.xyz"
+            }
           "summary": "Get Server List",
           "description": "Retrieves a list of SCP:SL servers with powerful filtering capabilities. You can filter by any server property by simply adding it as a query parameter (e.g., `isoCode=US`, `modded=true`).",
           "operationId": "getServerList",
@@ -295,6 +294,10 @@
     "/timestamp": {
       "get": {
         "tags": ["Real-Time Data"],
+        "servers": [
+          {
+            "url": "https://nwapi.daon.xyz"
+          }
         "summary": "Get Data Timestamp",
         "description": "Retrieves the Unix millisecond timestamp of the last time the server list data was successfully fetched and stored. This can be used to determine data freshness and cache invalidation strategies.",
         "operationId": "getDataTimestamp",
