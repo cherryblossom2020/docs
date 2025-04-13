@@ -1,6 +1,6 @@
 ---
 title: "Get Server List"
-openapi: "GET /"
+openapi: "GET https://nwapi.daon.xyz/"
 description: "Retrieves a list of servers with filtering, sorting, and field selection."
 ---
 
@@ -10,17 +10,17 @@ Retrieves a list of SCP:SL servers available via the cache. This endpoint allows
 
 <ParamField query="fields" type="string">
   Comma-separated list of server object fields to include in the response. If omitted, all fields are returned.
-  _Example: _
+  \_Example: \_
 </ParamField>
 
 <ParamField query="limit" type="integer">
   Maximum number of server results to return. If omitted, all matching servers are returned. Must be a positive integer.
-  _Example: _
+  \_Example: \_
 </ParamField>
 
 <ParamField query="sortBy" type="string">
   Field to sort results by. Currently supports `distance` (sorts servers nearest to the client first, requires Cloudflare GeoIP).
-  _Example: _
+  \_Example: \_
 </ParamField>
 
 <ParamField query="{dynamic_filter}" type="string | boolean | number">
@@ -30,7 +30,7 @@ Retrieves a list of SCP:SL servers available via the cache. This endpoint allows
   - Boolean comparisons use `true` or `false` (e.g., `modded=true`).
   - Numeric comparisons match exact numbers (e.g., `port=7777`).
   - Multiple filters can be combined (e.g., `?isoCode=US&friendlyFire=false`).
-    _Examples: , , , _
+    \_Examples: , , , \_
 </ParamField>
 
 ### Response
@@ -42,70 +42,70 @@ The response is a JSON array containing server objects that match the query crit
 
   <Expandable title="Toggle Server object details">
     <ResponseField name="serverId" type="integer">
-      Unique ID for the server entry. _Example: _
+      Unique ID for the server entry. \_Example: \_
     </ResponseField>
     <ResponseField name="accountId" type="integer">
-      Account ID associated with the server host. _Example: _
+      Account ID associated with the server host. \_Example: \_
     </ResponseField>
     <ResponseField name="ip" type="string">
-      Server IP address. _Example: _
+      Server IP address. \_Example: \_
     </ResponseField>
     <ResponseField name="port" type="integer">
-      Server port. _Example: _
+      Server port. \_Example: \_
     </ResponseField>
     <ResponseField name="players" type="string">
-      Current players / Max players (string). _Example: _
+      Current players / Max players (string). \_Example: \_
     </ResponseField>
     <ResponseField name="distance" type="integer">
-      Original distance metric from source API. _Example: _
+      Original distance metric from source API. \_Example: \_
     </ResponseField>
     <ResponseField name="info" type="string">
-      Base64 encoded server name/description (often contains HTML/color codes). _Example: _
+      Base64 encoded server name/description (often contains HTML/color codes). \_Example: \_
     </ResponseField>
     <ResponseField name="pastebin" type="string">
-      Pastebin code associated with the server. _Example: _
+      Pastebin code associated with the server. \_Example: \_
     </ResponseField>
     <ResponseField name="version" type="string">
-      Game version the server is running. _Example: _
+      Game version the server is running. \_Example: \_
     </ResponseField>
     <ResponseField name="privateBeta" type="boolean">
-      Boolean flag for private beta status. _Example: _
+      Boolean flag for private beta status. \_Example: \_
     </ResponseField>
     <ResponseField name="friendlyFire" type="boolean">
-      Boolean flag for friendly fire status. _Example: _
+      Boolean flag for friendly fire status. \_Example: \_
     </ResponseField>
     <ResponseField name="modded" type="boolean">
-      Boolean flag indicating if the server is modded. _Example: _
+      Boolean flag indicating if the server is modded. \_Example: \_
     </ResponseField>
     <ResponseField name="modFlags" type="integer">
-      Integer representing mod flags. _Example: _
+      Integer representing mod flags. \_Example: \_
     </ResponseField>
     <ResponseField name="whitelist" type="boolean">
-      Boolean flag for whitelist status. _Example: _
+      Boolean flag for whitelist status. \_Example: \_
     </ResponseField>
     <ResponseField name="isoCode" type="string">
-      ISO 3166-1 alpha-2 country code. _Example: _
+      ISO 3166-1 alpha-2 country code. \_Example: \_
     </ResponseField>
     <ResponseField name="continentCode" type="string">
-      Continent code. _Example: _
+      Continent code. \_Example: \_
     </ResponseField>
     <ResponseField name="latitude" type="number">
-      Server latitude (used for distance sorting). _Example: _
+      Server latitude (used for distance sorting). \_Example: \_
     </ResponseField>
     <ResponseField name="longitude" type="number">
-      Server longitude (used for distance sorting). _Example: _
+      Server longitude (used for distance sorting). \_Example: \_
     </ResponseField>
     <ResponseField name="official" type="string">
-      String indicating official status. _Example: _
+      String indicating official status. \_Example: \_
     </ResponseField>
     <ResponseField name="officialCode" type="integer">
-      Integer code for official status. _Example: _
+      Integer code for official status. \_Example: \_
     </ResponseField>
     <ResponseField name="displaySection" type="integer">
-      Integer code for display section in the official browser. _Example: _
+      Integer code for display section in the official browser. \_Example: \_
     </ResponseField>
     <ResponseField name="_distanceFromClient" type="number">
-      Calculated distance in KM from client IP. Only present if `sortBy=distance` was requested and successful. _Example: _
+      Calculated distance in KM from client IP. Only present if `sortBy=distance` was requested and successful. \_Example: \_
     </ResponseField>
   </Expandable>
 </ResponseField>
