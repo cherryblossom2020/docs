@@ -32,11 +32,6 @@
     "name": "Help Center",
     "url": "https://daonscp.channel.io"
   },
-  // --- Add this top-level key ---
-  // Tells Mintlify where your OpenAPI spec file is located (relative to the docs root)
-  // Make sure you have openapi.json in your project root or adjust the path.
-  "openapi": "openapi.json",
-  // -----------------------------
   "anchors": [
     {
       "name": "Discord",
@@ -52,41 +47,25 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": [
-        "introduction", // Keep your existing pages
-        "quickstart",
-        "development"
-      ]
+      "pages": ["introduction", "quickstart", "development"]
     },
     {
-      "group": "Essentials", // Keep your existing pages
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation"
-      ]
+      "group": "Essentials",
+      "pages": ["essentials/markdown", "essentials/code", "essentials/images", "essentials/settings", "essentials/navigation"]
     },
-    // --- Modify API Documentation Section ---
     {
-      "group": "NWApi Server List API", // Renamed for clarity
+      "group": "API Documentation",
+      "pages": ["api-reference/authentication"]
+    },
+    {
+      "group": "Endpoint Examples",
       "pages": [
-        // Assumes you have an introductory page named 'api-introduction.mdx'
-        // in the 'api-reference' folder. Adjust or remove if not needed.
-        "api-reference/api-introduction",
-
-        // Assumes your MDX file for GET / is named 'get-server-list.mdx'
-        // and located in the 'api-reference' folder. Adjust path/name as needed.
-        "api-reference/get-server-list",
-
-        // Assumes your MDX file for GET /timestamp is named 'get-data-timestamp.mdx'
-        // and located in the 'api-reference' folder. Adjust path/name as needed.
-        "api-reference/get-data-timestamp"
+        "api-reference/endpoint/get",
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/update",
+        "api-reference/endpoint/delete"
       ]
     }
-    // --- Removed the old "Endpoint Examples" group ---
-    // Its purpose is now served by the pages above linking to the OpenAPI spec.
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/mintlify",
