@@ -1,5 +1,115 @@
 ---
-title: "Get Server List"
-description: "Retrieves a list of SCP:SL servers with filtering, sorting, and field selection."
-openapi: "GET /"
+title: 'Get Server List'
+description: 'Retrieves a list of SCP:SL servers with filtering, sorting, and field selection.'
+api: 'GET https://nwapi.daon.xyz/'
 ---
+
+Retrieves a list of SCP:SL servers available via the cache.
+
+### Query Parameters
+
+<ParamField query="fields" type="string" optional>
+  Optional. Comma-separated list of server object fields to include in the response. If omitted, all fields are returned.
+  _Example: `fields=ip,port,players`_
+</ParamField>
+
+<ParamField query="limit" type="integer" optional>
+  Optional. Maximum number of server results to return. Defaults to returning all matching servers if omitted.
+  _Example: `limit=25`_
+</ParamField>
+
+<ParamField query="sortBy" type="string" optional>
+  Optional. Field to sort results by. Currently supports `distance` (sorts servers nearest to the client first, requires GeoIP data). If omitted or invalid, no specific sorting is applied beyond the source order.
+  _Example: `sortBy=distance`_
+</ParamField>
+
+<ParamField query="<filter_key>" type="string | boolean | number" optional>
+  **Dynamic Value Filter:** Any query parameter _not_ named `fields`, `limit`, or `sortBy` acts as a filter where the parameter name (`<filter_key>`) must match a field in the server data (e.g., `isoCode`), and the parameter value is the desired value to match against.
+
+  *   String filters are case-insensitive.
+  *   Boolean filters accept `true` or `false`.
+  *   Numeric filters match exact numbers.
+  *   You can apply multiple filters simultaneously.
+
+  _Examples: `isoCode=DE`, `modded=false`, `port=7777`, `players=0/20`_
+</ParamField>
+
+### Responses
+
+#### 200 OK
+Successfully retrieved the server list. The response body is a JSON array containing server objects. Check the `X-Data-Timestamp` header for data freshness (Unix ms).
+
+<ResponseField name="[]" type="array">
+  An array of server objects matching the query filters.
+
+  <Expandable title="View Server Object Schema">
+    <ResponseField name="serverId" type="integer"> Server's unique ID. Example: `87680` </ResponseField>
+    <ResponseField name="accountId" type="integer"> Account ID associated with the server. Example: `19126` </ResponseField>
+    <ResponseField name="ip" type="string"> Server IP address. Example: `"207.174.43.245"` </ResponseField>
+    <ResponseField name="port" type="integer"> Server port. Example: `7783` </ResponseField>
+    <ResponseField name="players" type="string"> Current players / max players. Example: `"0/25"` </ResponseField>
+    <ResponseField name="distance" type="integer"> Raw distance value (internal). Example: `2180` </ResponseField>
+    <ResponseField name="info" type="string"> Base64 encoded server info string. Example: `"PGNvbG..."` </ResponseField>
+    <ResponseField name="pastebin" type="string"> Pastebin code (if applicable). Example: `"GmHsVgPG"` </ResponseField>
+    <ResponseField name="version" type="string"> Game version. Example: `"14.1.0-..."` </ResponseField>
+    <ResponseField name="privateBeta" type="boolean"> If server is in private beta. Example: `true` </ResponseField>
+    <ResponseField name="friendlyFire" type="boolean"> If friendly fire is enabled. Example: `false` </ResponseField>
+    <ResponseField name="modded" type="boolean"> If the server is modded. Example: `false` </ResponseField>
+    <ResponseField name="modFlags" type="integer"> Mod flags value. Example: `0` </ResponseField>
+    <ResponseField name="whitelist" type="boolean"> If the server is whitelisted. Example: `false` </ResponseField>
+    <ResponseField name="isoCode" type="string"> Two-letter country code (ISO 3166-1 alpha-2). Example: `"CA"` </ResponseField>
+    <ResponseField name="continentCode" type="string"> Two-letter continent code. Example: `"NA"` </ResponseField>
+    <ResponseField name="latitude" type="number"> Approximate latitude. Example: `45.499` </ResponseField>
+    <ResponseField name="longitude" type="number"> Approximate longitude. Example: `-73.585` </ResponseField>
+    <ResponseField name="official" type="string"> Official server status text. Example: `"REGIONAL OFFICIAL"` </ResponseField>
+    <ResponseField name="officialCode" type="integer"> Official server status code. Example: `2` </ResponseField>
+    <ResponseField name="displaySection" type="integer"> Display section identifier. Example: `1` </ResponseField>
+    <ResponseField name="_distanceFromClient" type="number" optional> Approximate distance from the client in km (only present if `sortBy=distance` is used and GeoIP lookup succeeds). Example: `150.7` </ResponseField>
+  </Expandable>
+</ResponseField>
+
+#### 500 Internal Server Error
+An error occurred on the server while processing the request.
+
+<ResponseField name="error" type="string"> A summary of the error. </ResponseField>
+<ResponseField name="details" type="string" optional> Optional additional details about the error, if available. </ResponseField>
+
+### Examples
+
+<RequestExample>
+```bash Filter, Limit, Fields, Sort
+# Get up to 5 non-modded US servers, sorted by distance,
+# returning only ip, port, players, info, and isoCode fields.
+curl --location --request GET 'https://nwapi.daon.xyz/?isoCode=US&modded=false&limit=5&fields=ip,port,players,info,isoCode&sortBy=distance'
+```
+</RequestExample>
+
+<ResponseExample>
+```json 200 OK (Example Response)
+[
+  {
+    "ip": "157.254.169.180",
+    "port": 20200,
+    "players": "0/30",
+    "info": "W0NBIEVhc3RdIFtObyBSdWxlc10gRWV2ZWUgQ2VudGVy",
+    "isoCode": "US"
+  },
+  {
+    "ip": "51.81.95.231",
+    "port": 29160,
+    "players": "0/20",
+    "info": "PGNvbG9yPSMwMDgzZmY+RnVubnk8L2NvbG9yPiA8Y29sb3I9I2ZmMDAwMD5TY3A8L2NvbG9yPjxjb2xvcj0jMDAwMDAwMDA+PHNpemU9MT5FeGlsZWQgOS41LjE8L3NpemU+PC9jb2xvcj48Y29sb3I9IzAwMDAwMDAwPjxzaXplPTE+VUNSIDUuMC4wPC9zaXplPjwvY29sb3I+PGNvbG9yPSMwMDAwMDAwMD48c2l6ZT0xPkNlZE1vZFZlcmlmaWNhdGlvbjE0MTI0PC9zaXplPjwvY29sb3I+",
+    "isoCode": "US"
+  }
+]
+```
+
+```json 500 Internal Server Error (Example Response)
+{
+  "error": "Internal Server Error",
+  "details": "Database connection failed"
+}
+```
+</ResponseExample>
+```
+
