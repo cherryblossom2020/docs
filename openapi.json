@@ -301,7 +301,7 @@
           },
           "info": { 
             "type": "string", 
-            "description": "Base64 encoded server name/description with color HTML tags", 
+            "description": "Base64 encoded server name/description with Unity Rich Text", 
             "example": "PGNvbG9y..." 
           },
           "pastebin": { 
