@@ -1,0 +1,120 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "DAON INFO CENTER",
+  "theme": "maple",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg",
+    "href": "https://daon.xyz"
+  },
+  "favicon": "/favicon.png",
+  "colors": {
+    "primary": "#6394ff",
+    "light": "#AE87FF",
+    "dark": "#0D001D",
+    "background": {
+      "dark": "#090014"
+    },
+    "anchors": {
+      "from": "#FF7F57",
+      "to": "#6394ff"
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "SCP: SL",
+        "href": "https://scpslgame.com/"
+      },
+      {
+        "label": "SQUAD",
+        "href": "https://www.joinsquad.com/"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Help Center",
+      "href": "https://daonscp.channel.io"
+    }
+  },
+  "anchors": [
+    {
+      "name": "Discord",
+      "icon": "discord",
+      "url": "https://discord.gg/daon"
+    },
+    {
+      "name": "Website",
+      "icon": "globe",
+      "url": "https://daon.xyz"
+    }
+  ],
+  "navigation": {
+    "dropdowns": [
+      {
+        "dropdown": "Get Started",
+        "icon": "book",
+        "description": "Get started with the DAON INFO CENTER",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "development"
+            ]
+          },
+          {
+            "group": "Essentials",
+            "pages": [
+              "essentials/markdown",
+              "essentials/code",
+              "essentials/images",
+              "essentials/settings",
+              "essentials/navigation"
+            ]
+          }
+        ]
+      },
+      {
+        "dropdown": "API References",
+        "icon": "brackets-curly",
+        "description": "Explore our APIs",
+        "groups": [
+          {
+            "group": "NWApi Server List API",
+            "pages": [
+              "api-reference/api-introduction",
+              "api-reference/get-server-list",
+              "api-reference/get-data-timestamp"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "api": {
+    "baseUrl": "https://nwapi.daon.xyz",
+    "playground": {
+      "mode": "simple"
+    }
+  },
+  "openapi": "./openapi.json",
+  "footer": {
+    "socials": {
+      "discord": "https://discord.gg/daon",
+      "github": "https://github.com/mintlify",
+      "linkedin": "https://www.linkedin.com/company/mintsearch"
+    }
+  },
+  "contextual": {
+    "options": ["copy", "view", "chatgpt", "claude"]
+  },
+  "seo": {
+    "metatags": {
+      "og:site_name": "DAON INFO CENTER",
+      "og:title": "DAON INFO CENTER",
+      "og:description": "Documentation and API reference for DAON-developed services and tools."
+    }
+  }
+}
