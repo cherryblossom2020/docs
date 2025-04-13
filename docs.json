@@ -3,7 +3,7 @@
   "name": "DAON INFO CENTER",
   "theme": "maple",
   "logo": {
-    "dark": "/logo/dark.svg",
+    "dark": "/logo/dark.png",
     "light": "/logo/light.png",
     "href": "https://daon.xyz"
   },
