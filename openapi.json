@@ -172,9 +172,10 @@
             "description": "Filter servers by official status label",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "enum": ["REGIONAL OFFICIAL", "LOCAL OFFICIAL"]
             },
-            "example": "OFFICIAL"
+            "example": "REGIONAL OFFICIAL"
           },
           {
             "name": "continentCode",
