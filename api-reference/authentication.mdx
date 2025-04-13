@@ -1,11 +1,22 @@
 ---
 title: 'Get Server List'
-description: 'Retrieves a list of servers with filtering, sorting, and field selection.'
+description: 'Retrieves a list of SCP:SL servers with filtering, sorting, and field selection.'
+# This links to the 'GET /' operation defined in your openapi.json
+# Mintlify finds 'openapi.json' via the global setting in docs.json
 openapi: 'GET /'
 ---
 
 Retrieves a list of SCP:SL servers available via the cache.
 
-You can filter results using query parameters matching server properties (like `isoCode=US` or `modded=false`), limit the number of results with `limit`, select specific fields using `fields`, and sort the closest servers first using `sortBy=distance`.
+Use the interactive playground below (generated from the OpenAPI spec) to try out requests. You can:
 
-{/* Mintlify automatically inserts the API Playground and details here based on the 'openapi' frontmatter */}
+*   **Filter results:** Add query parameters matching server properties (like `isoCode=US` or `modded=false`). See the OpenAPI spec for examples like `isoCode`, `modded`, `friendlyFire`. Remember any server property can potentially be used as a filter.
+*   **Select specific fields:** Use the `fields` parameter (e.g., `fields=ip,port,players`).
+*   **Limit results:** Use the `limit` parameter (e.g., `limit=10`).
+*   **Sort results:** Use `sortBy=distance` to get the nearest servers first (requires GeoIP data for your request).
+
+{/*
+  IMPORTANT: Do NOT add <ParamField>, <ResponseField>, <RequestExample>,
+  or <ResponseExample> here. Mintlify generates these automatically
+  from the 'openapi: GET /' reference above and your openapi.json file.
+*/}
