@@ -71,7 +71,9 @@
                     "official",
                     "officialCode",
                     "displaySection",
-                    "_distanceFromClient"
+                    "_distanceFromClient",
+                    "_currentPlayers",
+                    "_maxPlayers"
                   ]
                 }
               },
@@ -93,13 +95,35 @@
             {
               "name": "sortBy",
               "in": "query",
-              "description": "Field to sort results by. Currently only `distance` is supported, which sorts servers by distance from the client (your) location (nearest first)",
+              "description": "Field to sort results by. Use `players` or `currentPlayers` to sort by current player count (most populated first), or `distance` to sort by distance from your location.",
               "required": false,
               "schema": {
                 "type": "string",
-                "enum": ["distance"]
+                "enum": ["distance", "players", "currentPlayers"]
               },
-              "example": "distance"
+              "example": "players"
+            },
+            {
+              "name": "minPlayers",
+              "in": "query",
+              "description": "Filter servers to show only those with at least this many current players",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "example": 5
+            },
+            {
+              "name": "maxPlayers",
+              "in": "query",
+              "description": "Filter servers to show only those with at most this many current players",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "example": 20
             },
             {
               "name": "isoCode",
