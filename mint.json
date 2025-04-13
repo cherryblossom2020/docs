@@ -72,6 +72,13 @@
       ]
     }
   ],
+  "api": {
+    "baseUrl": "https://nwapi.daon.xyz",
+    "playground": {
+      "mode": "simple"
+    }
+  },
+  "openapi": "./openapi.json",
   "footerSocials": {
     "twitter": "https://twitter.com/mintlify",
     "github": "https://github.com/mintlify",
