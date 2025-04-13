@@ -76,6 +76,7 @@
         "groups": [
           {
             "group": "DAON SCP: SL API",
+            "openapi": "./openapi.json",
             "pages": [
               "api-reference/get-server-list",
               "api-reference/get-data-timestamp"
@@ -91,7 +92,6 @@
       "mode": "simple"
     }
   },
-  "openapi": "./openapi.json",
   "footer": {
     "socials": {
       "discord": "https://discord.gg/daon"
