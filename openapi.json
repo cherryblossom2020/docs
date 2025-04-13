@@ -92,7 +92,7 @@
           {
             "name": "sortBy",
             "in": "query",
-            "description": "Field to sort results by. Currently only `distance` is supported, which sorts servers by distance from the client's location (nearest first). Requires Cloudflare GeoIP to work properly.",
+            "description": "Field to sort results by. Currently only `distance` is supported, which sorts servers by distance from the client (your) location (nearest first)",
             "required": false,
             "schema": {
               "type": "string",
@@ -484,7 +484,7 @@
   },
   "x-server-data-refresh": {
     "description": "Server data is automatically refreshed via a Cloudflare Worker scheduled task.",
-    "frequency": "Every 5 minutes"
+    "frequency": "Every 1 minutes"
   },
   "x-distance-calculation": {
     "description": "Distance is calculated using the Haversine formula, which determines the great-circle distance between two points on a sphere (Earth) given their longitudes and latitudes.",
