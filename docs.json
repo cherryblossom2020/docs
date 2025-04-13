@@ -77,7 +77,6 @@
           {
             "group": "SCP: SL Server List API",
             "pages": [
-              "api-reference/api-introduction",
               "api-reference/get-server-list",
               "api-reference/get-data-timestamp"
             ]
