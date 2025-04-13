@@ -31,76 +31,147 @@
     }
   ],
   "paths": {
-    "/": {
-      "get": {
-        "tags": ["Servers"],
-        "summary": "Get Server List",
-        "operationId": "getServerList",
-        "parameters": [
-          {
-            "name": "fields",
-            "in": "query",
-            "description": "Comma-separated list of server object fields to include in the response. If omitted, all fields are returned.",
-            "required": false,
-            "style": "form",
-            "explode": false,
-            "schema": {
-              "type": "array",
-              "items": {
+      "/": {
+        "get": {
+          "tags": ["Servers"],
+          "summary": "Get Server List",
+          "description": "Retrieves a list of SCP:SL servers with powerful filtering capabilities. You can filter by any server property by simply adding it as a query parameter (e.g., `isoCode=US`, `modded=true`).",
+          "operationId": "getServerList",
+          "parameters": [
+            {
+              "name": "fields",
+              "in": "query",
+              "description": "Comma-separated list of server object fields to include in the response. If omitted, all fields are returned.",
+              "required": false,
+              "style": "form",
+              "explode": false,
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "enum": [
+                    "serverId",
+                    "accountId",
+                    "ip",
+                    "port",
+                    "players",
+                    "distance",
+                    "info",
+                    "pastebin",
+                    "version",
+                    "privateBeta",
+                    "friendlyFire",
+                    "modded",
+                    "modFlags",
+                    "whitelist",
+                    "isoCode",
+                    "continentCode",
+                    "latitude",
+                    "longitude",
+                    "official",
+                    "officialCode",
+                    "displaySection",
+                    "_distanceFromClient"
+                  ]
+                }
+              },
+              "example": "ip,port,players,isoCode"
+            },
+            {
+              "name": "limit",
+              "in": "query",
+              "description": "Maximum number of server results to return. Use this parameter to reduce response size and improve performance for large datasets.",
+              "required": false,
+              "schema": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 1000,
+                "default": null
+              },
+              "example": 25
+            },
+            {
+              "name": "sortBy",
+              "in": "query",
+              "description": "Field to sort results by. Currently only `distance` is supported, which sorts servers by distance from the client (your) location (nearest first)",
+              "required": false,
+              "schema": {
                 "type": "string",
-                "enum": [
-                  "serverId",
-                  "accountId",
-                  "ip",
-                  "port",
-                  "players",
-                  "distance",
-                  "info",
-                  "pastebin",
-                  "version",
-                  "privateBeta",
-                  "friendlyFire",
-                  "modded",
-                  "modFlags",
-                  "whitelist",
-                  "isoCode",
-                  "continentCode",
-                  "latitude",
-                  "longitude",
-                  "official",
-                  "officialCode",
-                  "displaySection",
-                  "_distanceFromClient"
-                ]
-              }
+                "enum": ["distance"]
+              },
+              "example": "distance"
             },
-            "example": "ip,port,players,isoCode"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Maximum number of server results to return. Use this parameter to reduce response size and improve performance for large datasets.",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 1000,
-              "default": null
+            {
+              "name": "isoCode",
+              "in": "query",
+              "description": "Filter servers by country using ISO 3166-1 alpha-2 code",
+              "required": false,
+              "schema": {
+                "type": "string"
+              },
+              "example": "US"
             },
-            "example": 25
-          },
-          {
-            "name": "sortBy",
-            "in": "query",
-            "description": "Field to sort results by. Currently only `distance` is supported, which sorts servers by distance from the client (your) location (nearest first)",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": ["distance"]
+            {
+              "name": "modded",
+              "in": "query",
+              "description": "Filter servers by modded status",
+              "required": false,
+              "schema": {
+                "type": "boolean"
+              },
+              "example": false
             },
-            "example": "distance"
-          }
-        ],
+            {
+              "name": "friendlyFire",
+              "in": "query",
+              "description": "Filter servers by friendly fire setting",
+              "required": false,
+              "schema": {
+                "type": "boolean"
+              },
+              "example": true
+            },
+            {
+              "name": "whitelist",
+              "in": "query",
+              "description": "Filter servers by whitelist status",
+              "required": false,
+              "schema": {
+                "type": "boolean"
+              },
+              "example": false
+            },
+            {
+              "name": "official",
+              "in": "query",
+              "description": "Filter servers by official status label",
+              "required": false,
+              "schema": {
+                "type": "string"
+              },
+              "example": "OFFICIAL"
+            },
+            {
+              "name": "continentCode",
+              "in": "query",
+              "description": "Filter servers by continent code",
+              "required": false,
+              "schema": {
+                "type": "string"
+              },
+              "example": "EU"
+            },
+            {
+              "name": "privateBeta",
+              "in": "query",
+              "description": "Filter servers by private beta status",
+              "required": false,
+              "schema": {
+                "type": "boolean"
+              },
+              "example": false
+            }
+          ],
         "responses": {
           "200": {
             "description": "A list of servers matching the criteria.",
