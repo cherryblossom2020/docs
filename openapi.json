@@ -1,0 +1,231 @@
+// openapi.json
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "NWApi Server List API",
+    "description": "Provides access to a cached list of SCP: Secret Laboratory servers, originally sourced from the official `lobbylist.php` endpoint. Enhances the original data with filtering, field selection, limiting, and distance-based sorting.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://nwapi.daon.xyz",
+      "description": "Production Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Servers",
+      "description": "Operations related to the server list"
+    },
+    {
+      "name": "Metadata",
+      "description": "Operations providing information about the API data"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Servers"],
+        "summary": "Get Server List",
+        "description": "Retrieves a list of SCP:SL servers. Allows filtering by any server property (e.g., `isoCode=US`, `modded=true`), selecting specific fields (`fields=ip,port`), limiting results (`limit=10`), and sorting by distance from the client (`sortBy=distance`). \n\n**Note on Filtering:** Any query parameter *not* named `fields`, `limit`, or `sortBy` is treated as a filter where the parameter name is the field key and the parameter value is the value to match (case-insensitive for strings, exact for numbers/booleans).",
+        "operationId": "getServerList",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated list of server object fields to include in the response. If omitted, all fields are returned.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "ip,port,players,isoCode"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of server results to return.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "example": 25
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Field to sort results by. Currently only `distance` is supported (nearest first, requires Cloudflare GeoIP).",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["distance"]
+            },
+            "example": "distance"
+          },
+          {
+            "name": "isoCode",
+            "in": "query",
+            "description": "Filter by ISO 3166-1 alpha-2 country code (Example Filter).",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "DE"
+          },
+          {
+            "name": "modded",
+            "in": "query",
+            "description": "Filter by modded status (Example Filter).",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "example": false
+          },
+          {
+            "name": "friendlyFire",
+            "in": "query",
+            "description": "Filter by friendly fire status (Example Filter).",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "example": true
+          }
+          // Add more explicit examples of common filters if desired,
+          // but the description covers the dynamic nature.
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of servers matching the criteria.",
+            "headers": {
+              "X-Data-Timestamp": {
+                "description": "The Unix millisecond timestamp of when the data was last fetched.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Server"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error processing the request.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/timestamp": {
+      "get": {
+        "tags": ["Metadata"],
+        "summary": "Get Data Timestamp",
+        "description": "Retrieves the Unix millisecond timestamp of the last time the server list data was successfully fetched and stored.",
+        "operationId": "getDataTimestamp",
+        "responses": {
+          "200": {
+            "description": "The timestamp of the latest data.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "timestamp": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Unix millisecond timestamp",
+                      "example": 1678886400000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No data has been fetched and stored yet.",
+             "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": { "error": "No data available yet."}
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error retrieving the timestamp.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                 "example": { "error": "Failed to fetch timestamp"}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Server": {
+        "type": "object",
+        "properties": {
+          "serverId": { "type": "integer", "example": 87680 },
+          "accountId": { "type": "integer", "example": 19126 },
+          "ip": { "type": "string", "format": "ipv4", "example": "207.174.43.245" },
+          "port": { "type": "integer", "example": 7783 },
+          "players": { "type": "string", "description": "Current players / Max players", "example": "15/25" },
+          "distance": { "type": "integer", "description": "Original distance metric from source API", "example": 2180 },
+          "info": { "type": "string", "description": "Base64 encoded server name/description", "example": "PGNvbG9y..." },
+          "pastebin": { "type": "string", "example": "GmHsVgPG" },
+          "version": { "type": "string", "example": "14.1.0-release-beta-bab40c71" },
+          "privateBeta": { "type": "boolean", "example": false },
+          "friendlyFire": { "type": "boolean", "example": false },
+          "modded": { "type": "boolean", "example": true },
+          "modFlags": { "type": "integer", "example": 0 },
+          "whitelist": { "type": "boolean", "example": false },
+          "isoCode": { "type": "string", "description": "ISO 3166-1 alpha-2 country code", "example": "CA" },
+          "continentCode": { "type": "string", "example": "NA" },
+          "latitude": { "type": "number", "format": "double", "example": 45.499 },
+          "longitude": { "type": "number", "format": "double", "example": -73.585 },
+          "official": { "type": "string", "example": "REGIONAL OFFICIAL" },
+          "officialCode": { "type": "integer", "example": 2 },
+          "displaySection": { "type": "integer", "example": 1 },
+           "_distanceFromClient": { "type": "number", "format": "double", "description": "Calculated distance in KM from client IP (present if sorted by distance & requested)", "example": 150.7, "nullable": true }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "A summary of the error."
+          },
+          "details": {
+            "type": "string",
+            "description": "Optional additional details about the error.",
+            "nullable": true
+          }
+        },
+        "required": ["error"]
+      }
+    }
+  }
+}
