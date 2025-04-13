@@ -1,158 +1,25 @@
 ---
 title: "Get Server List"
-description: "Retrieves a list of SCP:SL servers with filtering, sorting, and field selection."
-api: "GET https://nwapi.daon.xyz/"
+# Use the 'openapi' key to link to your spec
+# Format: 'METHOD /path' - Assumes openapi.json is defined globally in docs.json
+openapi: "GET /"
+description: "Retrieves a list of servers with filtering, sorting, and field selection."
 ---
 
-### Query Parameters
+This endpoint retrieves the cached list of SCP: Secret Laboratory servers.
 
-<ParamField query="fields" type="string">
-  Optional. Comma-separated list of server object fields to include in the response. If omitted, all fields are returned.
-  \_Example: \_
-</ParamField>
+### Key Features:
 
-<ParamField query="limit" type="integer">
-  Optional. Maximum number of server results to return. Defaults to returning all matching servers.
-  \_Example: \_
-</ParamField>
+*   **Filtering:** Use query parameters matching server properties (e.g., `?isoCode=US&modded=false`). Any parameter not named `fields`, `limit`, or `sortBy` acts as a filter. String matches are case-insensitive.
+*   **Field Selection:** Use the `fields` parameter (e.g., `?fields=ip,port,players`) to get only the data you need.
+*   **Limiting:** Use the `limit` parameter (e.g., `?limit=10`) to control the number of results.
+*   **Sorting:** Use `sortBy=distance` to order servers from nearest to farthest based on your IP address location (requires Cloudflare GeoIP).
 
-<ParamField query="sortBy" type="string">
-  Optional. Field to sort results by. Currently supports `distance` (sorts servers nearest to the client first, requires Cloudflare GeoIP). If omitted or invalid, no specific sorting is applied beyond the source order.
-  \_Example: \_
-</ParamField>
+{/*
+  Mintlify automatically inserts the following based on the 'openapi' key above:
+  - Interactive API Playground
+  - Request Parameters table (from openapi.json parameters)
+  - Response details (from openapi.json responses and schemas)
+*/}
 
-<ParamField query="{dynamic_filter}" type="string | boolean | number">
-  Optional. **Dynamic Value Filter.** Any query parameter _not_ named `fields`, `limit`, or `sortBy` acts as a filter. The parameter name must match a field in the server data (e.g., `isoCode`), and the value is the desired value.
-  Filters match case-insensitively for strings. Boolean filters accept `true` or `false`. Numeric filters match exact numbers. You can apply multiple filters.
-  \_Examples: , , , \_
-</ParamField>
-
-### Responses
-
-**200 OK** - Successfully retrieved the server list.
-
-The response body is a JSON array containing server objects. The `X-Data-Timestamp` header in the response indicates the freshness of the data (Unix milliseconds).
-
-<ResponseField name="[]" type="array">
-  An array of server objects. See the Data Schema section for object structure.
-
-  <Expandable title="Toggle Server Object Example">
-    <ResponseField name="serverId" type="integer">
-      Example: 87680
-    </ResponseField>
-    <ResponseField name="accountId" type="integer">
-      Example: 19126
-    </ResponseField>
-    <ResponseField name="ip" type="string">
-      Example: "207.174.43.245"
-    </ResponseField>
-    <ResponseField name="port" type="integer">
-      Example: 7783
-    </ResponseField>
-    <ResponseField name="players" type="string">
-      Example: "0/25"
-    </ResponseField>
-    <ResponseField name="distance" type="integer">
-      Example: 2180
-    </ResponseField>
-    <ResponseField name="info" type="string">
-      Example: "PGNvbG..."
-    </ResponseField>
-    <ResponseField name="pastebin" type="string">
-      Example: "GmHsVgPG"
-    </ResponseField>
-    <ResponseField name="version" type="string">
-      Example: "14.1.0-..."
-    </ResponseField>
-    <ResponseField name="privateBeta" type="boolean">
-      Example: true
-    </ResponseField>
-    <ResponseField name="friendlyFire" type="boolean">
-      Example: false
-    </ResponseField>
-    <ResponseField name="modded" type="boolean">
-      Example: false
-    </ResponseField>
-    <ResponseField name="modFlags" type="integer">
-      Example: 0
-    </ResponseField>
-    <ResponseField name="whitelist" type="boolean">
-      Example: false
-    </ResponseField>
-    <ResponseField name="isoCode" type="string">
-      Example: "CA"
-    </ResponseField>
-    <ResponseField name="continentCode" type="string">
-      Example: "NA"
-    </ResponseField>
-    <ResponseField name="latitude" type="number">
-      Example: 45.499
-    </ResponseField>
-    <ResponseField name="longitude" type="number">
-      Example: -73.585
-    </ResponseField>
-    <ResponseField name="official" type="string">
-      Example: "REGIONAL OFFICIAL"
-    </ResponseField>
-    <ResponseField name="officialCode" type="integer">
-      Example: 2
-    </ResponseField>
-    <ResponseField name="displaySection" type="integer">
-      Example: 1
-    </ResponseField>
-    <ResponseField name="_distanceFromClient" type="number">
-      Example: 150.7 (Present if sorted by distance)
-    </ResponseField>
-  </Expandable>
-</ResponseField>
-
-**500 Internal Server Error** - An error occurred while processing the request.
-
-<ResponseField name="error" type="string">
-  A summary of the error.
-</ResponseField>
-
-<ResponseField name="details" type="string">
-  Optional additional details about the error.
-</ResponseField>
-
-### Examples
-
-<RequestExample>
-
-```bash Filter, Limit, Fields, Sort
-curl --location --request GET 'https://nwapi.daon.xyz/?isoCode=US&modded=false&limit=5&fields=ip,port,players,info,isoCode&sortBy=distance'
-```
-
-</RequestExample>
-
-<ResponseExample>
-
-```json 200 OK
-[
-  {
-    "ip": "157.254.169.180",
-    "port": 20200,
-    "players": "0/30",
-    "info": "W0NBIEVhc3RdIFtObyBSdWxlc10gRWV2ZWUgQ2VudGVy",
-    "isoCode": "US"
-  },
-  {
-    "ip": "51.81.95.231",
-    "port": 29160,
-    "players": "0/20",
-    "info": "PGNvbG9yPSMwMDgzZmY+RnVubnk8L2NvbG9yPiA8Y29sb3I9I2ZmMDAwMD5TY3A8L2NvbG9yPjxjb2xvcj0jMDAwMDAwMDA+PHNpemU9MT5FeGlsZWQgOS41LjE8L3NpemU+PC9jb2xvcj48Y29sb3I9IzAwMDAwMDAwPjxzaXplPTE+VUNSIDUuMC4wPC9zaXplPjwvY29sb3I+PGNvbG9yPSMwMDAwMDAwMD48c2l6ZT0xPkNlZE1vZFZlcmlmaWNhdGlvbjE0MTI0PC9zaXplPjwvY29sb3I+",
-    "isoCode": "US"
-  }
-]
-```
-
-
-```json 500 Internal Server Error
-{
-  "error": "Failed to process request",
-  "details": "Specific error message here"
-}
-```
-
-</ResponseExample>
+{/* You can add MORE content here if needed, like specific usage examples or notes */}
