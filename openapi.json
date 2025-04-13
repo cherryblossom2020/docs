@@ -29,8 +29,8 @@
   "paths": {
       "/": {
         "get": {
+          "tags": ["Real-Time Data"],
           "summary": "Get Server List",
-          "tag": "Real-Time Data"
           "description": "Retrieves a list of SCP:SL servers with powerful filtering capabilities. You can filter by any server property by simply adding it as a query parameter (e.g., `isoCode=US`, `modded=true`).",
           "operationId": "getServerList",
           "parameters": [
@@ -294,8 +294,8 @@
     },
     "/timestamp": {
       "get": {
+        "tags": ["Real-Time Data"],
         "summary": "Get Data Timestamp",
-        "tag": "Real-Time Data",
         "description": "Retrieves the Unix millisecond timestamp of the last time the server list data was successfully fetched and stored. This can be used to determine data freshness and cache invalidation strategies.",
         "operationId": "getDataTimestamp",
         "responses": {
