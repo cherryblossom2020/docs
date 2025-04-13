@@ -45,31 +45,6 @@
   "navigation": {
     "dropdowns": [
       {
-        "dropdown": "Get Started",
-        "icon": "book",
-        "description": "Get started with the DAON INFO CENTER",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "introduction",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          }
-        ]
-      },
-      {
         "dropdown": "API References",
         "icon": "brackets-curly",
         "description": "Explore our APIs",
