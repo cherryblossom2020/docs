@@ -14,6 +14,11 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
+  "servers": [
+    {
+      "url": "https://nwapi.daon.xyz",
+      "description": "Real-time Server List API"
+    }
   ],
   "tags": [
     {
@@ -22,175 +27,176 @@
     }
   ],
   "paths": {
-      "/": {
-        "get": {
-          "tags": ["Real-Time Data"],
-          "servers": [
-            {
-              "url": "https://nwapi.daon.xyz"
-            }
-          "summary": "Get Server List",
-          "description": "Retrieves a list of SCP:SL servers with powerful filtering capabilities. You can filter by any server property by simply adding it as a query parameter (e.g., `isoCode=US`, `modded=true`).",
-          "operationId": "getServerList",
-          "parameters": [
-            {
-              "name": "fields",
-              "in": "query",
-              "description": "Comma-separated list of server object fields to include in the response. If omitted, all fields are returned.",
-              "required": false,
-              "style": "form",
-              "explode": false,
-              "schema": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": [
-                    "serverId",
-                    "accountId",
-                    "ip",
-                    "port",
-                    "players",
-                    "distance",
-                    "info",
-                    "pastebin",
-                    "version",
-                    "privateBeta",
-                    "friendlyFire",
-                    "modded",
-                    "modFlags",
-                    "whitelist",
-                    "isoCode",
-                    "continentCode",
-                    "latitude",
-                    "longitude",
-                    "official",
-                    "officialCode",
-                    "displaySection",
-                    "_distanceFromClient",
-                    "_currentPlayers",
-                    "_maxPlayers"
-                  ]
-                }
-              },
-              "example": "ip,port,players,isoCode"
-            },
-            {
-              "name": "limit",
-              "in": "query",
-              "description": "Maximum number of server results to return. Use this parameter to reduce response size and improve performance for large datasets.",
-              "required": false,
-              "schema": {
-                "type": "integer",
-                "minimum": 1,
-                "maximum": 1000,
-                "default": null
-              },
-              "example": 25
-            },
-            {
-              "name": "sortBy",
-              "in": "query",
-              "description": "Field to sort results by. Use `distance` to sort by distance from your location or `players`to sort by current player count (most populated first).",
-              "required": false,
-              "schema": {
+    "/": {
+      "get": {
+        "tags": ["Real-Time Data"],
+        "servers": [
+          {
+            "url": "https://nwapi.daon.xyz"
+          }
+        ],
+        "summary": "Get Server List",
+        "description": "Retrieves a list of SCP:SL servers with powerful filtering capabilities. You can filter by any server property by simply adding it as a query parameter (e.g., `isoCode=US`, `modded=true`).",
+        "operationId": "getServerList",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated list of server object fields to include in the response. If omitted, all fields are returned.",
+            "required": false,
+            "style": "form",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "items": {
                 "type": "string",
-                "enum": ["distance", "players"]
-              },
-              "example": "players"
+                "enum": [
+                  "serverId",
+                  "accountId",
+                  "ip",
+                  "port",
+                  "players",
+                  "distance",
+                  "info",
+                  "pastebin",
+                  "version",
+                  "privateBeta",
+                  "friendlyFire",
+                  "modded",
+                  "modFlags",
+                  "whitelist",
+                  "isoCode",
+                  "continentCode",
+                  "latitude",
+                  "longitude",
+                  "official",
+                  "officialCode",
+                  "displaySection",
+                  "_distanceFromClient",
+                  "_currentPlayers",
+                  "_maxPlayers"
+                ]
+              }
             },
-            {
-              "name": "minPlayers",
-              "in": "query",
-              "description": "Filter servers to show only those with at least this many current players",
-              "required": false,
-              "schema": {
-                "type": "integer",
-                "minimum": 0
-              },
-              "example": 5
+            "example": "ip,port,players,isoCode"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of server results to return. Use this parameter to reduce response size and improve performance for large datasets.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000,
+              "default": null
             },
-            {
-              "name": "maxPlayers",
-              "in": "query",
-              "description": "Filter servers to show only those with at most this many current players",
-              "required": false,
-              "schema": {
-                "type": "integer",
-                "minimum": 0
-              },
-              "example": 20
+            "example": 25
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "description": "Field to sort results by. Use `distance` to sort by distance from your location or `players`to sort by current player count (most populated first).",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["distance", "players"]
             },
-            {
-              "name": "isoCode",
-              "in": "query",
-              "description": "Filter servers by country using ISO 3166-1 alpha-2 code",
-              "required": false,
-              "schema": {
-                "type": "string"
-              },
-              "example": "US"
+            "example": "players"
+          },
+          {
+            "name": "minPlayers",
+            "in": "query",
+            "description": "Filter servers to show only those with at least this many current players",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
             },
-            {
-              "name": "modded",
-              "in": "query",
-              "description": "Filter servers by modded status",
-              "required": false,
-              "schema": {
-                "type": "boolean"
-              },
-              "example": false
+            "example": 5
+          },
+          {
+            "name": "maxPlayers",
+            "in": "query",
+            "description": "Filter servers to show only those with at most this many current players",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0
             },
-            {
-              "name": "friendlyFire",
-              "in": "query",
-              "description": "Filter servers by friendly fire setting",
-              "required": false,
-              "schema": {
-                "type": "boolean"
-              },
-              "example": true
+            "example": 20
+          },
+          {
+            "name": "isoCode",
+            "in": "query",
+            "description": "Filter servers by country using ISO 3166-1 alpha-2 code",
+            "required": false,
+            "schema": {
+              "type": "string"
             },
-            {
-              "name": "whitelist",
-              "in": "query",
-              "description": "Filter servers by whitelist status",
-              "required": false,
-              "schema": {
-                "type": "boolean"
-              },
-              "example": false
+            "example": "US"
+          },
+          {
+            "name": "modded",
+            "in": "query",
+            "description": "Filter servers by modded status",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             },
-            {
-              "name": "official",
-              "in": "query",
-              "description": "Filter servers by official status label",
-              "required": false,
-              "schema": {
-                "type": "string"
-              },
-              "example": "OFFICIAL"
+            "example": false
+          },
+          {
+            "name": "friendlyFire",
+            "in": "query",
+            "description": "Filter servers by friendly fire setting",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             },
-            {
-              "name": "continentCode",
-              "in": "query",
-              "description": "Filter servers by continent code",
-              "required": false,
-              "schema": {
-                "type": "string"
-              },
-              "example": "EU"
+            "example": true
+          },
+          {
+            "name": "whitelist",
+            "in": "query",
+            "description": "Filter servers by whitelist status",
+            "required": false,
+            "schema": {
+              "type": "boolean"
             },
-            {
-              "name": "privateBeta",
-              "in": "query",
-              "description": "Filter servers by private beta status",
-              "required": false,
-              "schema": {
-                "type": "boolean"
-              },
-              "example": false
-            }
-          ],
+            "example": false
+          },
+          {
+            "name": "official",
+            "in": "query",
+            "description": "Filter servers by official status label",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "OFFICIAL"
+          },
+          {
+            "name": "continentCode",
+            "in": "query",
+            "description": "Filter servers by continent code",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "EU"
+          },
+          {
+            "name": "privateBeta",
+            "in": "query",
+            "description": "Filter servers by private beta status",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "example": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "A list of servers matching the criteria.",
@@ -298,6 +304,7 @@
           {
             "url": "https://nwapi.daon.xyz"
           }
+        ],
         "summary": "Get Data Timestamp",
         "description": "Retrieves the Unix millisecond timestamp of the last time the server list data was successfully fetched and stored. This can be used to determine data freshness and cache invalidation strategies.",
         "operationId": "getDataTimestamp",
@@ -332,7 +339,7 @@
           },
           "404": {
             "description": "No data has been fetched and stored yet. This typically occurs if the API was just deployed or the scheduled fetch job has not run successfully.",
-             "content": {
+            "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
@@ -348,7 +355,7 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 },
-                 "example": { "error": "Failed to fetch timestamp"}
+                "example": { "error": "Failed to fetch timestamp"}
               }
             }
           }
@@ -476,6 +483,18 @@
             "description": "Calculated distance in kilometers from client IP (present only if sorted by distance & requested)", 
             "example": 150.7, 
             "nullable": true 
+          },
+          "_currentPlayers": {
+            "type": "integer",
+            "description": "Extracted current player count (present only if explicitly requested)",
+            "example": 15,
+            "nullable": true
+          },
+          "_maxPlayers": {
+            "type": "integer",
+            "description": "Extracted maximum player capacity (present only if explicitly requested)",
+            "example": 25,
+            "nullable": true
           }
         },
         "example": {
@@ -578,10 +597,11 @@
   },
   "x-server-data-refresh": {
     "description": "Server data is automatically refreshed via a Cloudflare Worker scheduled task.",
-    "frequency": "Every 1 minutes"
+    "frequency": "Every 1 minute"
   },
   "x-distance-calculation": {
     "description": "Distance is calculated using the Haversine formula, which determines the great-circle distance between two points on a sphere (Earth) given their longitudes and latitudes.",
     "unit": "kilometers"
   }
 }
+
