@@ -75,7 +75,7 @@
         "description": "Explore our APIs",
         "groups": [
           {
-            "group": "NWApi Server List API",
+            "group": "SCP: Secret Laboratory Server List API",
             "pages": [
               "api-reference/api-introduction",
               "api-reference/get-server-list",
@@ -95,9 +95,7 @@
   "openapi": "./openapi.json",
   "footer": {
     "socials": {
-      "discord": "https://discord.gg/daon",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://www.linkedin.com/company/mintsearch"
+      "discord": "https://discord.gg/daon"
     }
   },
   "contextual": {
