@@ -75,7 +75,7 @@
         "description": "Explore our APIs",
         "groups": [
           {
-            "group": "SCP: SL Server List API",
+            "group": "DAON SCP: SL API",
             "pages": [
               "api-reference/get-server-list",
               "api-reference/get-data-timestamp"
