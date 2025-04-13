@@ -78,8 +78,8 @@
             "group": "DAON SCP: SL API",
             "openapi": "./openapi.json",
             "pages": [
-              "api-reference/get-server-list",
-              "api-reference/get-data-timestamp"
+              "get-server-list",
+              "get-data-timestamp"
             ]
           }
         ]
