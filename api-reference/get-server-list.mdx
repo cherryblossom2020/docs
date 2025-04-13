@@ -4,29 +4,27 @@ description: "Retrieves a list of SCP:SL servers with filtering, sorting, and fi
 api: "GET https://nwapi.daon.xyz/"
 ---
 
-Retrieves a list of SCP:SL servers available via the cache.
-
 ### Query Parameters
 
 <ParamField query="fields" type="string">
   Optional. Comma-separated list of server object fields to include in the response. If omitted, all fields are returned.
-  _Example: _
+  \_Example: \_
 </ParamField>
 
 <ParamField query="limit" type="integer">
   Optional. Maximum number of server results to return. Defaults to returning all matching servers.
-  _Example: _
+  \_Example: \_
 </ParamField>
 
 <ParamField query="sortBy" type="string">
   Optional. Field to sort results by. Currently supports `distance` (sorts servers nearest to the client first, requires Cloudflare GeoIP). If omitted or invalid, no specific sorting is applied beyond the source order.
-  _Example: _
+  \_Example: \_
 </ParamField>
 
 <ParamField query="{dynamic_filter}" type="string | boolean | number">
   Optional. **Dynamic Value Filter.** Any query parameter _not_ named `fields`, `limit`, or `sortBy` acts as a filter. The parameter name must match a field in the server data (e.g., `isoCode`), and the value is the desired value.
   Filters match case-insensitively for strings. Boolean filters accept `true` or `false`. Numeric filters match exact numbers. You can apply multiple filters.
-  _Examples: , , , _
+  \_Examples: , , , \_
 </ParamField>
 
 ### Responses
@@ -40,91 +38,70 @@ The response body is a JSON array containing server objects. The `X-Data-Timesta
 
   <Expandable title="Toggle Server Object Example">
     <ResponseField name="serverId" type="integer">
-       Example: 87680 
+      Example: 87680
     </ResponseField>
-    
     <ResponseField name="accountId" type="integer">
-       Example: 19126 
+      Example: 19126
     </ResponseField>
-    
     <ResponseField name="ip" type="string">
-       Example: "207.174.43.245" 
+      Example: "207.174.43.245"
     </ResponseField>
-    
     <ResponseField name="port" type="integer">
-       Example: 7783 
+      Example: 7783
     </ResponseField>
-    
     <ResponseField name="players" type="string">
-       Example: "0/25" 
+      Example: "0/25"
     </ResponseField>
-    
     <ResponseField name="distance" type="integer">
-       Example: 2180 
+      Example: 2180
     </ResponseField>
-    
     <ResponseField name="info" type="string">
-       Example: "PGNvbG..." 
+      Example: "PGNvbG..."
     </ResponseField>
-    
     <ResponseField name="pastebin" type="string">
-       Example: "GmHsVgPG" 
+      Example: "GmHsVgPG"
     </ResponseField>
-    
     <ResponseField name="version" type="string">
-       Example: "14.1.0-..." 
+      Example: "14.1.0-..."
     </ResponseField>
-    
     <ResponseField name="privateBeta" type="boolean">
-       Example: true 
+      Example: true
     </ResponseField>
-    
     <ResponseField name="friendlyFire" type="boolean">
-       Example: false 
+      Example: false
     </ResponseField>
-    
     <ResponseField name="modded" type="boolean">
-       Example: false 
+      Example: false
     </ResponseField>
-    
     <ResponseField name="modFlags" type="integer">
-       Example: 0 
+      Example: 0
     </ResponseField>
-    
     <ResponseField name="whitelist" type="boolean">
-       Example: false 
+      Example: false
     </ResponseField>
-    
     <ResponseField name="isoCode" type="string">
-       Example: "CA" 
+      Example: "CA"
     </ResponseField>
-    
     <ResponseField name="continentCode" type="string">
-       Example: "NA" 
+      Example: "NA"
     </ResponseField>
-    
     <ResponseField name="latitude" type="number">
-       Example: 45.499 
+      Example: 45.499
     </ResponseField>
-    
     <ResponseField name="longitude" type="number">
-       Example: -73.585 
+      Example: -73.585
     </ResponseField>
-    
     <ResponseField name="official" type="string">
-       Example: "REGIONAL OFFICIAL" 
+      Example: "REGIONAL OFFICIAL"
     </ResponseField>
-    
     <ResponseField name="officialCode" type="integer">
-       Example: 2 
+      Example: 2
     </ResponseField>
-    
     <ResponseField name="displaySection" type="integer">
-       Example: 1 
+      Example: 1
     </ResponseField>
-    
-    <ResponseField name="_distanceFromClient" type="number" nullable>
-       Example: 150.7 (Present if sorted by distance) 
+    <ResponseField name="_distanceFromClient" type="number">
+      Example: 150.7 (Present if sorted by distance)
     </ResponseField>
   </Expandable>
 </ResponseField>
@@ -132,14 +109,12 @@ The response body is a JSON array containing server objects. The `X-Data-Timesta
 **500 Internal Server Error** - An error occurred while processing the request.
 
 <ResponseField name="error" type="string">
-   A summary of the error. 
+  A summary of the error.
 </ResponseField>
 
-
-<ResponseField name="details" type="string" optional>
-   Optional additional details about the error. 
+<ResponseField name="details" type="string">
+  Optional additional details about the error.
 </ResponseField>
-
 
 ### Examples
 
