@@ -380,7 +380,7 @@
             }
           ],
           "summary": "Get Historical Server Metrics",
-          "description": "Retrieves historical player count metrics for a specific server with smart time-based aggregation.\n\n## Overview\nThe API automatically determines the optimal time interval for data aggregation based on the requested time range. This ensures efficient data transfer and meaningful visualization.\n\n## Smart Time Intervals\n\nTime Range | Interval\n---|---\n≤ 30 minutes | 30-second intervals\n≤ 1 hour | 1-minute intervals\n≤ 3 hours | 3-minute intervals\n≤ 6 hours | 5-minute intervals\n≤ 12 hours | 10-minute intervals\n≤ 24 hours | 15-minute intervals\n≤ 7 days | 30-minute intervals\n≤ 30 days | 1-hour intervals\n≤ 90 days | 3-hour intervals\n≤ 180 days | 6-hour intervals\n> 180 days | 1-day intervals\n\n## Benefits\n- Data points are meaningful for the time range\n- Response size remains manageable\n- Visualization remains clear and useful",
+          "description": "Retrieves historical player count metrics for a specific server with smart time-based aggregation.\n\n## Overview\nThe API automatically determines the optimal time interval for data aggregation based on the requested time range. This ensures efficient data transfer and meaningful visualization.\n\n## Smart Time Intervals\n\nTime Range | Interval\n---|---\n≤ 30 minutes | 30-second intervals\n≤ 1 hour | 1-minute intervals\n≤ 3 hours | 3-minute intervals\n≤ 6 hours | 5-minute intervals\n≤ 12 hours | 10-minute intervals\n≤ 24 hours | 15-minute intervals\n≤ 7 days | 30-minute intervals\n≤ 30 days | 1-hour intervals\n≤ 90 days | 3-hour intervals\n≤ 180 days | 6-hour intervals\n>",
           "operationId": "getHistoricalStats",
           "parameters": [
             {
